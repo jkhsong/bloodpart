@@ -1,4 +1,4 @@
-# Microparticle detection in whole blood (BLOOD PARTICLE)
+# Microparticle detection in whole blood
 
 ## Background:
 Bloodpart (Blood Particle) was developed to automate the detection and analysis of exogenous particles in large (>1,000 image) whole blood datasets.
@@ -18,7 +18,7 @@ Gaussian Thresholding vs. K-Means Clustering:
 
 
 ## Visualized particle detection:  
- ![example2](/SMBImageProcessing/conventionalcomparison.png "conventionalcomparison")
+ <img src="SMBImageProcessing/conventionalcomparison.png" width=50% height=50%>
 
 ## Example outputs: 
 
