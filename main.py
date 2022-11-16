@@ -38,7 +38,7 @@ subdir = choicedir+ '\\' + choicedirlist[choice-1]
 print(subdir)
 
 #pick image detection methodology:
-methodchoice = int(input(f"Pick 1 for Normalized Convolution \nPick 2 for Gaussian Thresholding: "))
+methodchoice = int(input(f"Pick 1 for Normalized Convolution \nPick 2 for Gaussian Thresholding \nPick 3 for K-Means clustering \nPick 4 for Gaussian Mixture Model: "))
 
 #read all files in dir
 choice = rootdir
@@ -74,8 +74,13 @@ averagecirc = detcount/filecount
 circspernl = averagecirc/volume_per_slide
 circsperml = circspernl * 1000000
 corrected_circ_conc = circsperml * dilution_correction
+averagepartsize = 'X'
 
 
-print(f"Total number of circles counted was: {detcount}.")
+print(f"Total number of particles counted was: {detcount}.")
 print(f"Number of images counted was: {filecount}.")
-print(f"Concentration of blood MBs is: {corrected_circ_conc} per mL.")
+print(f"Microscope objective used: 20x.")
+print(f"Dilution correction was: {dilution_correction}.")
+print(f"Volume of blood per microscope slide was: {volume_per_slide}.")
+print(f"Average particle size was: {averagepartsize} microns.")
+print(f"Concentration of blood particles is: {corrected_circ_conc} per mL.")
