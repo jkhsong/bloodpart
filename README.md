@@ -1,7 +1,7 @@
 # Microparticle detection in whole blood
 
 ## Background:
-Bloodpart (Blood Particle) was developed to automate the detection and analysis of exogenous particles in large (>1,000 image) whole blood datasets.
+BloodpartML (Blood Particle Machine Learning) was developed to automate the detection and analysis of exogenous particles in large (>1,000 image) whole blood datasets.
 
 ## Rationale:
 Due to the high concentration of red blood cells (RBCs) in whole blood, detection and dimensional characterization of exogenous particles using impedance (e.g. Coulter counter) or optics (e.g. flow-cytometry) is highly inaccurate.  Thus, a means of discriminating exogenous particles from a confluence of RBCs is necessary to determine the quantity, size, and shape of such microparticles.  
@@ -32,7 +32,7 @@ Gaussian Thresholding vs. K-Means Clustering:
 
 
 
-## How Bloodpart works:
+## How BloodpartML works:
 
 Bloodpart extracts features by: 
 1. (Channelizing) Grayscale conversion.
