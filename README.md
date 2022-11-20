@@ -12,7 +12,7 @@ Brightfield microscopy, particularly of blood samples, can yield suboptimal imag
 
 Let's take a look at a few examples below.  
   
-Gaussian Thresholding vs. K-Means Clustering:
+Convolving with Kernel vs. K-Means Clustering:
     
 ![example](/SMBImageProcessing/GTvsKM.png?raw=true "GTvsKM")
 
