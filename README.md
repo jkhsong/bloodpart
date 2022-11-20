@@ -12,7 +12,7 @@ Brightfield microscopy, particularly of blood samples, can yield suboptimal imag
 
 Let's take a look at a few examples below.  
   
-Convolving with Kernel vs. K-Means Clustering (and -fold thresholding):
+Convolving with Kernel vs. K-Means Clustering (and k-1 thresholding):
     
 ![example](/SMBImageProcessing/GTvsKM.png?raw=true "GTvsKM")
 
