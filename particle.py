@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from methods.kmeans import kmeans
+from methods.algo import kmeans
 import archived.convolve as convolve
 import os
 
