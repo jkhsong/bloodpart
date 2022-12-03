@@ -6,6 +6,11 @@ BloodpartML (Blood Particle Machine Learning) is a functional testbed for image 
 ## Background:
 Due to the high concentration of red blood cells (RBCs) in whole blood, detection and dimensional characterization of ~1-5μm exogenous particles using impedance (e.g. Coulter counter) or purely optical methods (e.g. flow-cytometry) is infeasible.  Thus, a means of discriminating exogenous particles from a confluence of RBCs is necessary to determine the quantity, size, and shape of such microparticles. 
 
+Images serve as datasets for the eccentric application of machine learning classification methodologies such as Gaussian Mixture Models and K-means clustering.  
+
+## Future work:
+Decision-tree (random-forest) fitting of detected particles for further validation and filtering. 
+
 ## How to use:
 ### The program reads your data folder and asks you to select a specific image dataset:
 
@@ -50,7 +55,7 @@ Bloodpart extracts features by:
 1. (Channelizing) Grayscale conversion.
 2. (ML Classification)  Classification of pixels by shade-of-gray.
 3. (Convolve) Applying a normalization kernel to each image,
-4. (Thresholding) Applying  
+4. (Thresholding) If conventional image processing, apply thresholding. 
 5. Convolvement and circle-detection methods (i.e. Hough Transform).
 
 2. To determine the dose of particles in blood, Bloodpart relates particle counts to a calculated fluid volume represented by each image (as derived from image size, and user parameters under <code> main.py ##User Parameters##) </code>.
