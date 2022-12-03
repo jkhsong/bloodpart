@@ -1,148 +1,8 @@
 import cv2
 import numpy as np
-# from matplotlib import pyplot as plt
-import convolve
+from methods.kmeans import kmeans
+import archived.convolve as convolve
 import os
-# import imagej
-# import maven
-# import scyjava
-# import jnius
-
-
-# scyjava.config.add_option('-Xmx6g')
-# ij = imagej.init(['net.imagej:imagej:2.1.0', 'net.imagej:imagej-legacy'])
-# print(ij.getVersion)
-# print("imported IJ")
-
-def kmeans(filename, count, initial_means = None):
-    '''
-    As implemented in grayscale, k-means clustering initially classifies 
-    pixels into k random shades of gray, or clusters. Each k-means step 1) 
-    obtains a mean shade of pixels in each of the k clusters, then 2) re-
-    classifies each pixel into clusters (if necessary), which shifts the 
-    corresponding cluster's mean. This is continued until no change in 
-    clustering occurs (that is, pixels within clusters do not shift). 
-    '''
-    
-    img = cv2.imread(filename, cv2.IMREAD_COLOR)
-
-    # Convert to grayscale.
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    
-    ##Apply CLAHE equalization
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-    gray = clahe.apply(gray)
-    ##
-
-    cv2.imshow(f"Edge-enhanced image for {filename}", gray)
-    cv2.waitKey(0)
-    #select initial means
-    k = 12 #splitting into two images
-    X = np.array(gray)
-    X = X.flatten()
-    
-    rdim, cdim = np.size(gray,0), np.size(gray,1)
-
-    clusters = np.arange(0,rdim*cdim*3).reshape(rdim*cdim, 3)
-    oldclusters = np.zeros((rdim*cdim, 3))
-
-    try:
-        if initial_means == None:
-            initial_means = k_means_initial(X, k)
-    finally:
-        while np.array_equal(clusters, oldclusters) == False:
-            oldclusters = clusters
-            newmeans, centindex = k_means_step(X, k, initial_means)
-            clusters = newmeans[centindex]
-            initial_means = newmeans
-        clusters = np.asarray(clusters.reshape(rdim, cdim))
-
-        clusters[clusters > np.min(clusters)] = 255       
-
-        img = cv2.normalize(src=clusters, dst=None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
-
-        return detcirc(img, filename, count, 2)
-    
-def k_means_initial(X, k):
-    randomindices = np.random.choice(np.size(X,0), size=k, replace=False)
-    means = X[randomindices]
-    # means = []
-    # for x in range(k): ##Evenly distributing means to start instead of randomizing
-    #     means.append(int((255/k)*x))
-    # means = np.array(means)
-    return means
-
-
-
-def k_means_step(X, k, means):
-    centlist = [] #list of clusters by centroid
-    centdist = [] #distance to each centroid
-    newmeans = []
-
-    for i in range(k):
-        anotherlist = X-means[i]
-        centlist.append([])
-        centdist.append(np.einsum('i,i->i',anotherlist,anotherlist))
-    centdist = np.stack(centdist, axis = 1)
-    centindex = np.argmin(centdist, axis = 1)
-    
-    for i in range(k):
-        centlist[i] = X[np.argwhere(centindex == i)]
-        newmeans.append(np.mean(centlist[i], axis = 0, dtype=np.float64))
-    newmeans = np.array(newmeans)
-    
-    # newmeans = newmeans.reshape(k,np.size(X,1))
-    clusters = centindex.reshape(np.size(X,0),1)
-    
-    return (newmeans, clusters)
-
-def circlefindparticle(filename, count):
-    '''Utilizes convolvement (kernel, normalization) to facilitate edge detection
-    input: image filename, current circles count
-    returns: total circle count per image'''
-    # Read image.
-    img = cv2.imread(filename, cv2.IMREAD_COLOR)
-
-    # Convert to grayscale.
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    #convolve
-    kernel = np.array([[-1, -1, -1, -1, -1],
-                       [-1, -1, -1, -1, -1],
-                       [-1, -1, 35, -1, -1],
-                       [-1, -1, -1, -1, -1],
-                       [-1, -1, -1, -1, -1]])
-    normfactor = -24 + kernel[2][2]
-    rownum = 0
-    norm_kernel = ([[-1, -1, -1, -1, -1],
-                    [-1, -1, -1, -1, -1],
-                    [-1, -1, 35, -1, -1],
-                    [-1, -1, -1, -1, -1],
-                    [-1, -1, -1, -1, -1]])
-    for row in kernel:
-        print(row)
-        itemnum = 0
-        for item in row:
-            print(f"{rownum}, {itemnum}")
-            norm_kernel[rownum][itemnum] = kernel[rownum][itemnum]/normfactor
-            itemnum += 1
-        rownum += 1
-    norm_kernel = np.array(norm_kernel)
-    print(norm_kernel)
-
-    # output = convolve.convolve2D(gray, kernel, padding=0)
-    #Normalized convolve
-    output = cv2.filter2D(img, -1, norm_kernel)
-    output = cv2.filter2D(output, -1, kernel)
-    (thresh, binaryimg) = cv2.threshold(output, 127, 255, cv2.THRESH_BINARY)
-    binaryimg_inverted = cv2.bitwise_not(binaryimg)
-
-    cv2.imwrite('2DConvolved.jpg', output)
-    # cv2.imshow(f"Detected Circle for {filename}", binaryimg_inverted)
-    # cv2.waitKey(0)
-    return detcirc(output, filename, count, 1)
-
-
 
 def circleadaptive(filename, circles_count):
     '''Utilizes adaptive gaussian thresholds to conduct edge detection
@@ -173,7 +33,7 @@ def circleadaptive(filename, circles_count):
     cv2.imshow(f"Detected Circle for {filename}", th3)
     cv2.waitKey(0)
     # cv2.imshow(f"Original Image for {filename}", img)
-    # cv2.imwrite('out.tif', img)
+    # cv2.imwrite('\sample_output\out.tif', img) ##sample output!
     # cv2.waitKey(0)
     # print("showing circles")
     

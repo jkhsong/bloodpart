@@ -2,9 +2,8 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import os
-import convolve
+import archived.convolve as convolve
 import particle as pa
-import houghcircle
 
 
 #select directory
@@ -37,8 +36,8 @@ print(choicedirlist[choice-1])
 subdir = choicedir+ '\\' + choicedirlist[choice-1]
 print(subdir)
 
-#pick image detection methodology:
-methodchoice = int(input(f"Pick 1 for Normalized Convolution \nPick 2 for Gaussian Thresholding \nPick 3 for K-Means clustering \nPick 4 for Gaussian Mixture Model: "))
+#pick image processing methodology:
+methodchoice = int(input(f"Pick an image processing method:\n1 for Normalized Convolution \n2 for Gaussian Thresholding \n3 for K-Means clustering \n4 for Gaussian Mixture Model:\nPick choice 1-4"))
 
 #read all files in dir
 choice = rootdir
