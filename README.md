@@ -1,6 +1,6 @@
 # Microparticle detection in whole blood
 
-Last processed image before last commit             |  Particles detected
+Last image processed (updated every commit)              |  Particles detected
 :-------------------------:|:-------------------------:
 <img src="sample_output/original.png" >  |  <img src="sample_output/measured.png" >
 
