@@ -1,18 +1,20 @@
 # Microparticle detection in whole blood
 
+Last processed image before last commit             |  Particles detected
+:-------------------------:|:-------------------------:
+<img src="sample_output/original.png" >  |  <img src="sample_output/measured.png" >
+
 ## Purpose:
-BloodpartML (Blood Particle Machine Learning) is a functional testbed for image enhancement and image analysis of whole-blood microscopy image sets. Its foundation is software I wrote for the characterization of drug-delivery particles in whole blood. 
+BloodpartML (Blood Particle Machine Learning) started out as a functional testbed for image enhancement and image analysis techniques for the characterization of microbubbles in whole blood.  Image processing in ImageJ struggled to accommodate variations between images such as image gradients, blood clots, and anomalies related to microscopy and samples.  <br><br>
+
+For the sake of my colleagues' and my sanity, Blood particle analyzer (BloodpartO) was born. BloodpartML is an extension of that effort. <br><br>
+
 
 ## Background:
 Due to the high concentration of red blood cells (RBCs) in whole blood, detection and dimensional characterization of ~1-5μm exogenous particles using impedance (e.g. Coulter counter) or purely optical methods (e.g. flow-cytometry) is infeasible.  Thus, a means of discriminating exogenous particles from a confluence of RBCs is necessary to determine the quantity, size, and shape of such microparticles. 
 
-Images serve as datasets for the conventional (and eccentric) application of machine learning classification methodologies such as Gaussian Mixture Models and K-means clustering.
+Here, we apply classical image processing as well as machine learning classification methodologies (i.e. Gaussian Mixture Models and K-means clustering) for image enhancement and object detection. <br><br>
 
-## Rationale for improving de-noising and image normalization
-Brightfield microscopy, particularly of blood samples, can yield suboptimal images with a wide variety of image anomalies and noise types (gradients, blotchiness, uneven contrast).  
-
-<b><h3>Edge-detection kernel vs. immediate (k-means) clustering of pixel intensities:</h3></b>
-![example](/readme_images/GTvsKM.png?raw=true "GTvsKM")
 
 ## How BloodpartML works:
 
@@ -25,6 +27,12 @@ Broadly, Bloodpart extracts features by:
 
 2. To determine the dose of particles in blood, Bloodpart relates particle counts to a calculated fluid volume represented by each image (as derived from image size, and user parameters under <code> main.py ##User Parameters##) </code>.
 </ul>
+
+## Rationale for improving de-noising and image normalization
+Brightfield microscopy, particularly of blood samples, can yield suboptimal images with a wide variety of image anomalies and noise types (gradients, blotchiness, uneven contrast).  
+
+<b><h3>Edge-detection kernel vs. immediate (k-means) clustering of pixel intensities:</h3></b>
+![example](/readme_images/GTvsKM.png?raw=true "GTvsKM")
 
 ## Challenges:
 Differing red blood cell concentrations from image to image (and within images) generated non-trivial pixel intensity gradients. I found Contrast Limited Adaptive Histogram Equalization (<b>CLAHE</b>) useful in mitigating these macro-gradients. See reference below for additional information on CLAHE.  <br><br>
@@ -81,9 +89,6 @@ I've found that object/anomaly detection in whole-blood imagery is a fascinating
 > Volume of blood per microscope slide was: 14.1375.  
 > Average particle size was: 3.25 microns.  
 > **Concentration of blood particles is: 839856087114.3375 per mL.  **
-
-## Visualized particle detection:  
- <img src="readme_images/conventionalcomparison.png" width=50% height=50%>
 
 ## Image dataset requirements:
 - An **image dataset** folder (i.e. '\\images') should contain: 

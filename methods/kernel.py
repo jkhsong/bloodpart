@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 from particle import detcirc
-import archived.convolve as convolve
-import os
+# import archived.convolve as convolve
+# import os
 
 def circlefindparticle(filename, count):
     '''Utilizes convolvement (kernel, normalization) to facilitate edge detection

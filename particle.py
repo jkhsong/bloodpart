@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
-from methods.algo import kmeans
-import archived.convolve as convolve
-import os
+# from methods.algo import kmeans
+# import archived.convolve as convolve
+# import os
 
 def circleadaptive(filename, circles_count):
     '''Utilizes adaptive gaussian thresholds to conduct edge detection
@@ -11,6 +11,7 @@ def circleadaptive(filename, circles_count):
 
     # Read image.
     img = cv2.imread(filename, cv2.IMREAD_COLOR)
+    cv2.imwrite('X:\Dropbox\Image Processing\partblood\sample_output\original.png', img)
 
     # Convert to grayscale.
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -33,7 +34,7 @@ def circleadaptive(filename, circles_count):
     cv2.imshow(f"Detected Circle for {filename}", th3)
     cv2.waitKey(0)
     # cv2.imshow(f"Original Image for {filename}", img)
-    # cv2.imwrite('\sample_output\out.tif', img) ##sample output!
+    cv2.imwrite('\sample_output\out.tif', img) ##sample output!
     # cv2.waitKey(0)
     # print("showing circles")
     
@@ -71,13 +72,14 @@ def detcirc(img, filename, count, method):
     else:
         print("No circles detected.")
 # Show Images here
-    # cv2.imshow(f"Detected Circle for {filename}", img)
-    # cv2.waitKey(0)
-    cv2.imwrite('out.tif', img)
+    cv2.imshow(f"Detected Circle for {filename}", img)
+    cv2.waitKey(0)
+
+    cv2.imwrite('X:\Dropbox\Image Processing\partblood\sample_output\measured.png', img)
     print("showing circles")
 
     print(f"Circles detected in this image: {circles_count}.")
     return count
     
 
-kmeans('..\\SMB Image Processing\\50-50\\trial 1\\1\\1.TIF', 0)
+# kmeans('..\\SMB Image Processing\\50-50\\trial 1\\1\\1.TIF', 0)

@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 import os
 import archived.convolve as convolve
 import particle as pa
