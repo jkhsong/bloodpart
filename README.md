@@ -5,9 +5,9 @@ Last image processed (updated every commit)              |  Particles detected
 <img src="sample_output/original.png" >  |  <img src="sample_output/measured.png" >
 
 ## Purpose:
-BloodpartML (Blood Particle Machine Learning) started out as a functional testbed for image enhancement and image analysis techniques for the characterization of microbubbles in whole blood.  Image processing in ImageJ struggled to accommodate variations between images such as image gradients, blood clots, and anomalies related to microscopy and samples.  <br><br>
+BloodpartML (Blood Particle Machine Learning) started out as a functional testbed for image enhancement and image analysis techniques for the characterization of microbubbles in whole blood.  Image processing in ImageJ struggled to accommodate variations between images such as image gradients, blood clots, and anomalies related to microscopy and samples.<br>
 
-For the sake of my colleagues' and my sanity, Blood particle analyzer (Bloodpart1) was born. <br> <br>
+With over 300 images per experiment and a backlog of trials, Blood particle analyzer (Bloodpart1) was born with the purpose of saving my colleagues' and my sanity. <br> <br>
 BloodpartML is an extension of that effort. <br><br>
 
 
