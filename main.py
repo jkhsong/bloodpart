@@ -4,7 +4,8 @@ from matplotlib import pyplot as plt
 import os
 import archived.convolve as convolve
 import particle as pa
-
+# import pillow ##makes image object
+# imagestack = [ImageClass(filename) for filename in filelist]
 
 #select directory
 rootdir = '..\\SMB Image Processing\\50-50'
