@@ -8,7 +8,8 @@ import particle as pa
 # imagestack = [ImageClass(filename) for filename in filelist]
 
 #select directory
-rootdir = '..\\SMB Image Processing\\50-50'
+# rootdir = '..\\SMB Image Processing\\50-50'
+rootdir = 'data\\50-50'
 rootdirlist = os.listdir(rootdir)
 print(rootdirlist)
 
